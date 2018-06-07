@@ -1,10 +1,12 @@
 from Brain8888 import Brain8888
 from pprint import pprint
 
-inter = Brain8888();
+LANG = Brain8888();
 
-ast = inter.parse2(inter.tokenize("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++."))
+LANG.repl();
 
-pprint(ast, indent=4);
+# ast = inter.parse2(inter.tokenize("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++."))
 
-inter.interpret2(ast);
+# pprint(ast, indent=4);
+
+# inter.interpret2(ast);
