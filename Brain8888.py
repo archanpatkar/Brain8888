@@ -53,8 +53,10 @@ class Brain8888:
             # token = code[counter];
             if isinstance(token,list) :
                 # print(token)
+                # print(self.tape[self.current]);
                 while self.tape[self.current] != 0:
-                    self.eval(token)
+                    # print(self.tape[self.current]);
+                    self.eval(token);
             elif token.type == "Forward" :
                 self.current += 1;
                 self.tape.append(0);
