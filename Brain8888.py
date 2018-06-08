@@ -55,17 +55,19 @@ class Brain8888:
                 # print(token)
                 # print(self.tape[self.current]);
                 while self.tape[self.current] != 0:
-                    # print(self.tape[self.current]);
+                    print(self.tape[self.current]);
                     self.eval(token);
             elif token.type == "Forward" :
                 self.current += 1;
-                self.tape.append(0);
+                if(self.current == len(self.tape)):
+                    self.tape.append(0);
             elif token.type == "Backward" :
                 if self.current > 0 :
                     self.current -= 1;
                 else :
                     raise BaseException("Tape Already At The Start!");
             elif token.type == "Increment" :
+                print("Incrementing = ", self.current, "Value before Increment = ", self.tape[self.current])
                 self.tape[self.current] += 1;
             elif token.type == "Decrement" :
                 self.tape[self.current] -= 1;
@@ -74,7 +76,7 @@ class Brain8888:
                 if num >= 0:
                     print(chr(num), end='');
             elif token.type == "Read" :
-                self.tape[self.current] = ord(input()[0]);
+                self.tape[self.current] = ord(input());
             self.program_counter += 1;
 
     def repl(self):
@@ -85,9 +87,11 @@ class Brain8888:
         foreground(GREEN);
         read = input("> ");
         while read != "q" and read != "quit" and read != "exit" and read != "bye":
-            if(read == "current"):
+            if(read == "current position"):
                 print("Position of Tape Head = ",self.current)
                 print("Value of Current Cell = ",self.tape[self.current])
+            elif(read == "tape"):
+                print(self.tape)
             else:
                 tokens = self.tokenize(read);
                 ast = self.parse(tokens);
