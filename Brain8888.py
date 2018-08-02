@@ -50,12 +50,8 @@ class Brain8888:
 
     def eval(self,code):
         for token in code:
-            # token = code[counter];
             if isinstance(token,list) :
-                # print(token)
-                # print(self.tape[self.current]);
                 while self.tape[self.current] != 0:
-                    print(self.tape[self.current]);
                     self.eval(token);
             elif token.type == "Forward" :
                 self.current += 1;
@@ -67,7 +63,6 @@ class Brain8888:
                 else :
                     raise BaseException("Tape Already At The Start!");
             elif token.type == "Increment" :
-                print("Incrementing = ", self.current, "Value before Increment = ", self.tape[self.current])
                 self.tape[self.current] += 1;
             elif token.type == "Decrement" :
                 self.tape[self.current] -= 1;
