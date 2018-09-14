@@ -1,7 +1,7 @@
 # Brain8888
-### Interpreter for Brainfuck
+### Interpreter for Brainfuck written in Python
 
-## Hello World
+#### `Hello World`
 ```
 ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
 ```
