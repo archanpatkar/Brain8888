@@ -41,16 +41,16 @@ class Brain8888:
             tok = tokens[ip]
             ip += 1
             if(tok.type == "Loop-Start"):
-                current.append(tok)
+                stack.append(tok)
             elif(tok.type == "Loop-End"): 
                 loop = []
                 v = stack.pop()
                 while isinstance(v,list) or v.type != "Loop-Start":
                     loop.append(v)
                     v = stack.pop()
-                current.append(loop[::-1])
+                stack.append(loop[::-1])
             else:
-                current.append(tok)
+                stack.append(tok)
         return stack
 
     def get(self): return self.tape[self.current];
