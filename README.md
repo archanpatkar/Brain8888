@@ -1,5 +1,5 @@
 # Brain8888
-### Interpreter for Brainfuck written in Python
+### Pushdown Stack Machine based Interpreter for Brainfuck
 
 #### `Hello World`
 ```
