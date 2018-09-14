@@ -1,5 +1,7 @@
 from collections import namedtuple
 from Panim import *
+from pprint import pprint
+
 
 Token = namedtuple('Token', 'type symbol')
 
@@ -7,7 +9,9 @@ class Brain8888:
     def __init__(self):
         self.tape = [0];
         self.current = 0;
-        self.program_counter = 0;
+
+    def reset(self):
+        self.__init__()
 
     def tokenize(self,code):
         tokens = [];
@@ -31,31 +35,38 @@ class Brain8888:
         return tokens;
 
     def parse(self,tokens):
-        ip = 0;
-        main = [];
+        ip = 0
+        stack = []
+        # main = []
+        current = stack
         while ip < len(tokens):
-            tok = tokens[ip];
+            tok = tokens[ip]
+            ip += 1
             if(tok.type == "Loop-Start"):
-                loop = [];
-                while tok.type != "Loop-End" and ip < len(tokens):
-                    tok = tokens[ip];
-                    loop.append(tok);
-                    ip = ip + 1;
-                loop = loop[1:-1];
-                main.append(self.parse(loop));
+                current.append(tok)
+            elif(tok.type == "Loop-End"): 
+                loop = []
+                v = stack.pop()
+                while isinstance(v,list) or v.type != "Loop-Start":
+                    loop.append(v)
+                    v = stack.pop()
+                current.append(loop[::-1])
             else:
-                main.append(tok);
-            ip = ip + 1;
-        return main;
+                current.append(tok)
+        return stack
+
+    def get(self): return self.tape[self.current];
 
     def eval(self,code):
-        for token in code:
-            if isinstance(token,list) :
-                while self.tape[self.current] != 0:
+        program_counter = 0
+        while program_counter < len(code):
+            token = code[program_counter]
+            if isinstance(token,list):
+                while self.get() != 0:
                     self.eval(token);
             elif token.type == "Forward" :
                 self.current += 1;
-                if(self.current == len(self.tape)):
+                if(self.current >= len(self.tape)):
                     self.tape.append(0);
             elif token.type == "Backward" :
                 if self.current > 0 :
@@ -68,11 +79,11 @@ class Brain8888:
                 self.tape[self.current] -= 1;
             elif token.type == "Print" :
                 num = self.tape[self.current];
-                if num >= 0:
+                if num >= 0 and num <= 256:
                     print(chr(num), end='');
             elif token.type == "Read" :
                 self.tape[self.current] = ord(input());
-            self.program_counter += 1;
+            program_counter += 1;
 
     def repl(self):
         foreground(RED);
@@ -83,10 +94,12 @@ class Brain8888:
         read = input("> ");
         while read != "q" and read != "quit" and read != "exit" and read != "bye":
             if(read == "current position"):
-                print("Position of Tape Head = ",self.current)
-                print("Value of Current Cell = ",self.tape[self.current])
+                print("Position of Tape Head = ",self.current);
+                print("Value of Current Cell = ",self.tape[self.current]);
             elif(read == "tape"):
                 print(self.tape)
+            elif(read == "reset"):
+                self.reset();
             else:
                 tokens = self.tokenize(read);
                 ast = self.parse(tokens);
