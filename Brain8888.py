@@ -37,8 +37,6 @@ class Brain8888:
     def parse(self,tokens):
         ip = 0
         stack = []
-        # main = []
-        current = stack
         while ip < len(tokens):
             tok = tokens[ip]
             ip += 1
