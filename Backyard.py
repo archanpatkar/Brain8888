@@ -114,3 +114,41 @@
     #         else:
     #             self.each(char);
     #         self.program_counter += 1;
+
+
+
+# loop = [];
+                # tok = tokens[ip]
+                # ip += 1
+                # while tok.type != "Loop-End" and ip < len(tokens):
+                #     loop.append(tok);
+                #     tok = tokens[ip];
+                #     ip += 1;
+                # main.append(self.parse(loop));
+
+
+ # ip = 0;
+        # main = [];
+        # while ip < len(tokens):
+        #     tok = tokens[ip];
+        #     ip += 1
+        #     if(tok.type == "Loop-Start"):
+        #         parent = main
+        #         stack = []
+        #         stack.append(tok)
+        #         while ip < len(tokens):
+        #             tok = tokens[ip]
+        #             ip += 1
+        #             if tok.type == "Loop-End":
+        #                 loop = []
+        #                 v = stack.pop()
+        #                 while v.type != "Loop-Start":
+        #                     loop.append(v)
+        #                     v = stack.pop()
+        #                 parent.append(loop)
+        #                 parent = loop
+        #             else:    
+        #                 stack.append(tok)
+        #     else:
+        #         main.append(tok);
+        # return main;
