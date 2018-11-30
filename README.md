@@ -1,4 +1,4 @@
-# Brain8888
+### <img src="./brain8888.svg" />
 ### An Interpreter for Brainfuck
 
 #### `Hello World`
