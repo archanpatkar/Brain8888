@@ -1,3 +1,4 @@
+import sys
 from collections import namedtuple
 from Panim import *
 from pprint import pprint
@@ -82,6 +83,9 @@ class Brain8888:
                 self.tape[self.current] = ord(input());
             program_counter += 1;
 
+    def execute(self,code):
+        self.eval(self.parse(self.tokenize(code)))
+
     def repl(self):
         foreground(RED);
         print("Brain8888 0.0.1");
@@ -108,3 +112,11 @@ class Brain8888:
         print("May the Force be with you ✋");
         foreground(WHITE);
         background(BLACK);
+
+if __name__ == "__main__":
+    interpreter = Brain8888()
+    if len(sys.argv) > 1:
+        code = open(sys.argv[1],"r").read()
+        interpreter.execute(code)
+    else:
+        interpreter.repl()
