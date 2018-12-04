@@ -94,13 +94,18 @@ class Brain8888:
         foreground(GREEN) 
         read = input("> ") 
         while read != "q" and read != "quit" and read != "exit" and read != "bye":
-            if(read == "current position"):
+            if(read == "curpos"):
                 print("Position of Tape Head = ",self.current) 
                 print("Value of Current Cell = ",self.tape[self.current]) 
             elif(read == "tape"):
                 print(self.tape)
             elif(read == "reset"):
                 self.reset() 
+            elif(read == "help"):
+                print("tape - Print the Tape")
+                print("curpos - Current Position of Tape Head")
+                print("reset - Resets the Tape and the Tape Head")
+                print(" * - where * is valid in brainfuck")
             else:
                 tokens = self.tokenize(read) 
                 ast = self.parse(tokens) 
