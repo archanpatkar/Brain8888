@@ -1,7 +1,6 @@
 import sys
 from collections import namedtuple
 from Panim import *
-from pprint import pprint
 
 Token = namedtuple('Token', 'type symbol')
 
